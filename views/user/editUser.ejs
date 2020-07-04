@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../head.ejs %>
+  </head>
+  <body>
+    <header>
+      <% include ../navbar.ejs %>
+    </header>
+      <main>
+          <div class="container pt-5">
+              <div class="row">
+                  <div class="col-12">
+                      <form action="/users/update/<%-dataUser.user_id %>" method="post">      
+                          <fieldset class="p-3 mb-3 grey">
+                              <legend class="w-auto px-2"></legend>
+                              <div class="form-group col-12">
+                                  <label for="inputName">Nombre</label>
+                                  <input type="text" class="form-control" id="inputName" placeholder="Nombre" name="name" value="<%-dataUser.name %>">
+                              </div>
+                              <div class="form-group col-12">
+                                  <label for="inputLastName">Apellidos</label>
+                                  <input type="text" class="form-control" id="inputLastName" placeholder="Apellidos" name="lastName" value="<%-dataUser.last_name %>">
+                              </div> 
+                              <div class="form-group col-12">
+                                <label for="inputDNI">DNI</label>
+                                <input type="text" class="form-control" id="inputDNI" placeholder="DNI" name="dni" value="<%-dataUser.dni %>">
+                            </div>
+                            <div class="form-group col-12">
+                              <label for="inputPhone">Teléfono</label>
+                              <input type="text" class="form-control" id="inputPhone" placeholder="Teléfono" name="phone" value="<%-dataUser.phone %>">
+                          </div>                             
+                          <div class="form-group col-12">
+                            <label for="inputAddress">Dirección</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="Dirección" name="address" value="<%-dataUser.address %>">
+                        </div>      
+                          </fieldset>
+                          <div class="d-flex justify-content-center align-items-center m-5">
+                              <button type="submit" class="btn btn-dark ">Guardar cambios</button>
+                          </div>                          
+                        </form>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </body>
+</html>

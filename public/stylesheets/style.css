@@ -1,0 +1,30 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+main{
+  background-image: url('../images/film.webp');
+  background-attachment:fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: calc(100vh - 54px);
+}
+
+.grey{
+  background-color: rgba(255, 255, 255,0.8);
+  border-radius: 10px;
+}
+
+.form-buttons{
+  display: inline;
+}
+
+.form-buttons button{
+  border: none;
+  background: transparent;
+}

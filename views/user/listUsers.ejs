@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../head.ejs %>
+</head>
+<body>
+    <header>
+        <% include ../navbar.ejs %>
+    </header>
+    <main>
+        <div class="container pt-5">
+            <div class="row">
+              <div class="col-12 d-flex justify-content-between">
+                <h1 class="">Clientes</h1>
+                <a class="btn btn-secondary my-auto" href="/users/new" >+</a>
+              </div>
+              <div class="col-12 grey">
+                <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">DNI</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Acciones</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <%dataUsers.forEach(function(user){%>
+                  <tr>
+                    <th scope="row"><%= user.user_id%></th>
+                    <td><%= user.name%></td>
+                    <td><%= user.last_name%></td>
+                    <td><%= user.dni%></td>
+                    <td><%= user.phone%></td>
+                    <td><%= user.address%></td>
+                    <td>
+                        <a class="text-secondary" href="/users/edit/<%= user.user_id%>"><i class="far fa-edit"></i></a>
+                        <a class="text-secondary" href="/users/delete/<%= user.user_id%>"><i class="fas fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  <%})%>
+                </tbody>
+                </table>
+              </div>   
+            </div>
+          </div>
+    </main>
+    
+</body>
+</html>

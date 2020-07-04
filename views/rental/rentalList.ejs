@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../head.ejs %>
+  <script>
+    function resetFrom(){
+      document.getElementById('inputFilm').value = '';
+      document.getElementById('inputClient').value = '';
+      document.getElementById('inputRentId').value = '';
+      document.getElementById('rent-title').innerHTML = ""     
+    }
+  </script>
+</head>
+<body>
+    <header>
+        <% include ../navbar.ejs %>
+    </header>
+    <main>
+        <div class="container pt-5">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="">Alquileres</h1>
+                <div class="form-rental  p-3 mb-5 grey">
+                  <form action="rentals/add" method="post">
+                    <% let id_rent_1 = ''; if(dataOneRental != 'null') id_rent_1 = "Prestamo nº " + dataOneRental.rent_id%>
+                    <p class="text-black" id="rent-title"> <%- id_rent_1%></p>
+                    <div class="form-group">
+                      <label for="inputFilm">Pelicula</label>
+                      <% var movieId = ''; if(dataOneRental != 'null') movieId = dataOneRental.movie_id%>
+                      <!-- <input type="text" class="form-control" id="inputFilm" placeholder="Insertar identificador de pelicula" name="film" value="<%- movieId%>" required> -->
+                      <select class="form-control" name="film" id="inputFilm" value="<%- movieId%>" required>
+                        <option value="">Selecciona una pelicula</option>
+                        <% dataMovie.forEach(function(movie){ %>
+                          <% let selected = ''; if(movie.movie_id == movieId)selected = 'selected' %>
+                        <option value="<%- movie.movie_id %>"<%- selected %>><%- movie.title %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputClient">Cliente</label>
+                      <% let userId = ''; if(dataOneRental != 'null') userId = dataOneRental.user_id%>
+                      <!-- <input type="text" class="form-control" id="inputClient" placeholder="Insertar identificador de pelicula" name="user" value="<%-userId%>" required> -->
+                      <select class="form-control" name="user" id="inputClient" value="<%- userId%>" required>
+                        <option value="">Selecciona un usuario</option>
+                        <% dataUser.forEach(function(user){%>
+                          <% let selected = ''; if(user.user_id == userId)selected = 'selected' %>
+                          <option value="<%-user.user_id %>"<%- selected %>><%- user.name + ' ' + user.last_name %></option>
+                        <%}) %>
+                      </select>
+                    </div>
+                    <% let id_rent = ''; if(dataOneRental != 'null') id_rent = dataOneRental.rent_id%>
+                    <input type="hidden" name="rental_id" id="inputRentId" value="<%= id_rent%>">
+                    <button type="submit" class="btn btn-secondary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="resetFrom()">Limpiar</button>
+                  </form>
+                </div>
+              </div>
+              <div class="col-12 grey">
+                <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Pelicula</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Acciones</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <%dataRental.forEach(function(rent){%>
+                  <tr>
+                    <th scope="row"><%= rent.rent_id%></th>
+                    <td><%= rent.name + ','+ rent.last_name%></td>
+                    <td><%= rent.title + ' - '+ rent.movie_id%></td>
+                    <td><%= rent.date%></td>
+                    <td>
+                      <form  class="form-buttons" action="/rentals" method="post">
+                        <input type="hidden" name="rental_id" value="<%= rent.rent_id%>"">
+                        <button type="submit" class="text-secondary"><i class="far fa-edit"></i></button> 
+                      </form>
+                      <form class="form-buttons" action="/rentals/delete" method="post">
+                        <input type="hidden" name="rental_id" value="<%= rent.rent_id%>"">
+                        <button type="submit" class="text-secondary"><i class="fas fa-trash"></i></button> 
+                      </form> 
+                    </td>
+                  </tr>
+                  <%})%>
+                </tbody>
+                </table>
+              </div>   
+            </div>
+          </div>
+    </main>
+    
+</body>
+</html>
